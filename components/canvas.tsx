@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Layer, Stage, Image as KonvaImage, Line, Text } from "react-konva";
+import {
+  Layer,
+  Stage,
+  Image as KonvaImage,
+  Line,
+  Text,
+  Rect,
+} from "react-konva";
 import { transformLabels } from "../utils/labels";
 import NextImage from "next/image";
 
@@ -55,6 +62,7 @@ export default function Canvas({
   }, [image]);
 
   useEffect(() => {
+    console.log(labels);
     if (imageCanvas) {
       const newLabels = transformLabels(
         labels,
@@ -100,14 +108,21 @@ export default function Canvas({
               ];
               return (
                 <>
-                  <Line
+                  {/* <Line
                     x={0}
                     y={0}
-                    points={label.polygon.path}
+                    points={[]}
                     tension={0.5}
                     closed
                     stroke={`rgba(${color[0]}, ${color[1]}, ${color[2]})`}
                     fill={`rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.4)`}
+                  /> */}
+                  <Rect
+                    x={label.bounding_box.x}
+                    y={label.bounding_box.y}
+                    width={label.bounding_box.w}
+                    height={label.bounding_box.h}
+                    stroke="green"
                   />
                   <Text
                     text={label.label}

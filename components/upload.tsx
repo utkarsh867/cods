@@ -26,6 +26,7 @@ export default function Upload() {
           image: base64_image,
         });
         setCurrentImage(base64_image);
+        console.log(response.data);
         return response.data;
       })
     );
